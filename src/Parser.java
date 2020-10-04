@@ -24,13 +24,21 @@ public class Parser {
         inputFile.setRequired(false);
         options.addOption(inputFile);
 
+        Option sourceIP = new Option("i", "ip", true, "Ip address of client computer");
+        sourceIP.setRequired(false);
+        options.addOption(sourceIP);
+
+        Option DNS = new Option("d", "dns", false, "Retrieve DNS Address of IP");
+        DNS.setRequired(false);
+        options.addOption(DNS);
+
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
         try {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
-            Console.writeLine("парсинг параметров не удался");
+            Console.writeLine("парсинг параметров не удался", ConsoleColor.RED_BOLD);
             Console.writeLine(e.getMessage());
             formatter.printHelp("utility-name", options);
             System.exit(1);
