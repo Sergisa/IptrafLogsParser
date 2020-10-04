@@ -13,9 +13,9 @@ public class Parser {
     static CommandLine cmd;
     public static void main(String[] args) {
         Options options = new Options();
-        Option input = new Option("f", "file", true, "input file path");
-        input.setRequired(false);
-        options.addOption(input);
+        Option inputFile = new Option("f", "file", true, "input file path");
+        inputFile.setRequired(false);
+        options.addOption(inputFile);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -25,10 +25,8 @@ public class Parser {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             formatter.printHelp("utility-name", options);
-
             System.exit(1);
         }
-
         packets = new ArrayList<>();
         try {
             String line;
@@ -38,7 +36,7 @@ public class Parser {
                             "/var/log/iptraf-ng/ip_traffic-4122.log"
             ));
             while ((line = reader.readLine()) != null) {
-                if(!line.endsWith("********")  && !line.isBlank()) {
+                if(!line.endsWith("********")  && !line.isEmpty()) {
                     packets.add(Packet.build(line));
                 }
             }

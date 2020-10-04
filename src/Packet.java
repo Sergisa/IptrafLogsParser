@@ -11,7 +11,6 @@ public class Packet {
     }
 
     public static Packet build(String packetStringRepresentation){
-        System.out.println(packetStringRepresentation);
         String[] columns = packetStringRepresentation.split("; ");
         Packet packet = new Packet(columns[1]);
         packet.setAdapter( columns[2] );
